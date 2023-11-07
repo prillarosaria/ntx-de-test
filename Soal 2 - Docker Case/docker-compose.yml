@@ -1,2 +1,18 @@
-version: "3"
+version: '3'
 services:
+  fastapi:
+    build:
+      context: ./fastapi  
+    #Memberi akses fastapi untuk port 6000
+    ports:
+      - "6000:6000" 
+    #Nama envinronment variable yang digunakan untuk fastapi
+    environment:
+      - NAME=api
+
+  httpx_script:
+    build:
+      context: ./httpx_script 
+    #Membutuhkan service dari 'fastapi' untuk memulai skrip
+    depends_on:
+      - fastapi 
